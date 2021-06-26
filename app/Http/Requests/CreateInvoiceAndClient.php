@@ -16,7 +16,7 @@ class CreateInvoiceAndClient extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize():bool
     {
         return true;
     }
@@ -26,18 +26,18 @@ class CreateInvoiceAndClient extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules():array
     {
         return [
             'full_name'=>'required',
             'email' => 'required|email|unique:clients,email',
-            'mobile' => 'required|unique:clients,mobile',
-            'amount'=>'required|not_in:0',
+            'mobile' => 'required|unique:clients,mobile|gt:0',
+            'amount'=>'required|gt:0',
             'invoice_due_date'=>'required|date:Y-m-d|after:today'
         ];
     }
 
-    public function getClientData()
+    public function getClientData():array
     {
         return[
             'full_name'=>$this->input('full_name'),
@@ -45,7 +45,7 @@ class CreateInvoiceAndClient extends FormRequest
             'mobile'=>$this->input('mobile'),
         ];
     }
-    public function getInvoiceData()
+    public function getInvoiceData():array
     {
         return[
             'amount'=>$this->input('amount'),

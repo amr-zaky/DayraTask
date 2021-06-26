@@ -30,7 +30,7 @@ class CreateInvoice extends FormRequest
     {
         return [
             'client_id'=>'required|exists:clients,id',
-            'amount'=>'required|numeric|gt:0',
+            'amount'=>'required|gt:0',
             'invoice_due_date'=>'required|date:Y-m-d|after:today'
         ];
     }

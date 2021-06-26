@@ -19,6 +19,10 @@ class ClientInvoice extends Model
         'amount',
         'invoice_due_date',
     ];
+    protected $hidden=[
+        'created_at',
+        'updated_at',
+    ];
 
     public function client()
     {

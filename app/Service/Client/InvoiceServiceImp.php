@@ -16,7 +16,7 @@ class InvoiceServiceImp
 
     function getAllInvoices()
     {
-        return ClientInvoice::with('client')->get();
+        return ClientInvoice::with('client')->orderBy('created_at', 'DESC')->get();
     }
 
     function getInvoiceCLient($clientId)

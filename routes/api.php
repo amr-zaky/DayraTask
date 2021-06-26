@@ -14,18 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('login',[\App\Http\Controllers\Admin\AuthController::class,'login']);
+Route::post('login',[\App\Http\Controllers\Admin\AuthController::class,'login'])->name('login');
 
 
 Route::middleware('auth:api')->group(function (){
-
+    Route::get('clients',[\App\Http\Controllers\CLient\ClientController::class,'getAllClient'])->name('getAllClients');
+    Route::post('clients',[\App\Http\Controllers\CLient\ClientController::class,'createClient'])->name('createClient');
+    Route::get('clients/{id}',[\App\Http\Controllers\CLient\ClientController::class,'getOneClient'])->name('getClientDetails');
+    Route::get('getInvoices',[\App\Http\Controllers\CLient\ClientInvoiceController::class,'getAllInvoices'])->name('getAllInvoices');
+    Route::post('createInvoiceAndClient',[\App\Http\Controllers\CLient\ClientInvoiceController::class,'createInvoiceAndCLinet'])->name('createInvoiceAndClient');
+    Route::post('createInvoice',[\App\Http\Controllers\CLient\ClientInvoiceController::class,'CreateInvoice'])->name("createInvoice");
 });
-
-Route::get('users',[\App\Http\Controllers\CLient\ClientController::class,'getAllClient']);
-Route::post('users',[\App\Http\Controllers\CLient\ClientController::class,'createClient']);
-Route::get('users/{id}',[\App\Http\Controllers\CLient\ClientController::class,'getOneClient']);
-
-
-Route::get('getInvoices',[\App\Http\Controllers\CLient\ClientInvoiceController::class,'getAllInvoices']);
-Route::post('invoiceClient',[\App\Http\Controllers\CLient\ClientInvoiceController::class,'createInvoiceAndCLinet']);
-Route::post('createInvoice',[\App\Http\Controllers\CLient\ClientInvoiceController::class,'CreateInvoice']);

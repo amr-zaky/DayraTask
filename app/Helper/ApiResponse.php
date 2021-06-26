@@ -6,7 +6,7 @@ namespace App\Helper;
 
 class ApiResponse{
     public static function errors($errorsArray){
-        return response(['status' => false, 'errors' => $errorsArray],400);
+        return response(['status' => false, 'errors' => $errorsArray],403);
     }
 
     public static function data($data){

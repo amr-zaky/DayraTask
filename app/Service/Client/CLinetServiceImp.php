@@ -16,7 +16,7 @@ class CLinetServiceImp
 
     function getAllClients()
     {
-        return Client::all();
+        return Client::orderBy('created_at', 'DESC')->get();
     }
 
     function getOneClient($id)
