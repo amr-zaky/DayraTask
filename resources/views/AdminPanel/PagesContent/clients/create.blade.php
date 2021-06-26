@@ -78,7 +78,10 @@
                     },
                     error:function (ex) {
                         if (ex.status==401)
-                           window.location="{{route("loginPage")}}"
+                        {
+                            localStorage.removeItem('token');
+                            window.location="{{route("loginPage")}}"
+                        }
                         var errors=ex['responseJSON']['errors'];
                         if (errors['full_name'])
                             appendError('name',errors['full_name']);

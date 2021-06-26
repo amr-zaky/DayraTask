@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login',[\App\Http\Controllers\FrontEnd\AuthController::class,'login'])->name('loginPage');
+Route::get('/',[\App\Http\Controllers\FrontEnd\AuthController::class,'login'])->name('loginPage');
 
 
 

@@ -2,8 +2,14 @@
 
 namespace App\Exceptions;
 
+use App\Helper\ApiResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Response;
+use Exception;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class Handler extends ExceptionHandler
 {
@@ -34,8 +40,15 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function(TokenInvalidException $e, $request){
+            return ApiResponse::unauthorized(['error'=>'Invalid token']);
+        });
+        $this->renderable(function (TokenExpiredException $e, $request) {
+            return ApiResponse::unauthorized(['error'=>'Token has Expired']);
+        });
+
+        $this->renderable(function (JWTException $e, $request) {
+            return ApiResponse::unauthorized(['error'=>'Token not parsed']);
         });
     }
 }

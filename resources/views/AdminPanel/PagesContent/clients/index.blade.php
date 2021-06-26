@@ -27,6 +27,11 @@
                 clients.forEach(appendClients);
             },
             error:function (ex) {
+                if (ex.status==401)
+                {
+                    localStorage.removeItem('token');
+                    window.location="{{route("loginPage")}}"
+                }
                 alert('error');
             }
         });

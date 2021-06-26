@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login',[\App\Http\Controllers\Admin\AuthController::class,'login'])->name('login');
 
 
-Route::middleware('auth:api')->group(function (){
+Route::middleware('auth.jwt')->group(function (){
     Route::get('clients',[\App\Http\Controllers\CLient\ClientController::class,'getAllClient'])->name('getAllClients');
     Route::post('clients',[\App\Http\Controllers\CLient\ClientController::class,'createClient'])->name('createClient');
     Route::get('clients/{id}',[\App\Http\Controllers\CLient\ClientController::class,'getOneClient'])->name('getClientDetails');

@@ -5,6 +5,11 @@ namespace App\Helper;
 
 
 class ApiResponse{
+
+    public static function unauthorized($errorsArray){
+        return response(['status' => false, 'errors' => $errorsArray],401);
+    }
+
     public static function errors($errorsArray){
         return response(['status' => false, 'errors' => $errorsArray],403);
     }
