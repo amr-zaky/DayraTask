@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\CLient;
 
 
+use App\Events\NewInvoiceHasCreatedEvent;
 use App\Helper\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateInvoice;
@@ -52,12 +53,14 @@ class ClientInvoiceController extends Controller
     private function sendInvoiceMail($client,$invoice)
     {
         $emailData=[
+            'email'=>$client->email,
             'name'=>$client->full_name,
             'mobile'=>$client->mobile,
             'amount'=>$invoice->amount,
             'date'=>$invoice->invoice_due_date,
         ];
-       return  Mail::to($client->email)->send(new SendInvoiceMail($emailData));
+
+        event(new NewInvoiceHasCreatedEvent($emailData));
     }
 
 }

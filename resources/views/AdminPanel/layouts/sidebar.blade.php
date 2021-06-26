@@ -5,7 +5,7 @@
         <img src="{{url('dashboard')}}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
              class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">Quick App</span>
+        <span class="brand-text font-weight-light">Dayra App</span>
     </a>
 
     <!-- Sidebar -->

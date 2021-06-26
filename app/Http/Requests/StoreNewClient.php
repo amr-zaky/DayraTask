@@ -29,7 +29,7 @@ class StoreNewClient extends FormRequest
         return[
             'full_name'=>'required',
             'email' => 'required|email|unique:clients,email',
-            'mobile' => 'required|unique:clients|gt:0,min:11',
+            'mobile' => 'required|unique:clients|regex:/(01)[0-9]{9}/',
         ];
     }
 

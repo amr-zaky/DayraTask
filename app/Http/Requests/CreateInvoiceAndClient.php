@@ -31,7 +31,7 @@ class CreateInvoiceAndClient extends FormRequest
         return [
             'full_name'=>'required',
             'email' => 'required|email|unique:clients,email',
-            'mobile' => 'required|unique:clients,mobile|gt:0',
+            'mobile' => 'required|unique:clients|regex:/(01)[0-9]{9}/',
             'amount'=>'required|gt:0',
             'invoice_due_date'=>'required|date:Y-m-d|after:today'
         ];
