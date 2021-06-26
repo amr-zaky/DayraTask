@@ -40,7 +40,13 @@
     </div>
 </div>
 @push('custom-scripts')
+
     <script>
+        if (localStorage.hasOwnProperty('token'))
+        {
+            window.location="{{route('homePage')}}";
+        }
+
         $('#login-form').on('submit',function (e) {
             e.preventDefault();
             var email=$('#email').val();
