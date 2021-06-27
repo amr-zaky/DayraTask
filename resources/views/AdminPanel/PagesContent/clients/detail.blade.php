@@ -1,7 +1,7 @@
 @extends('AdminPanel.layouts.main')
 @section('content')
 
-
+    <h1 class="text-center"><strong>Invoices</strong></h1>
     <table id= "table" class="table table table-bordered tab-custom-content ml-auto">
         <thead>
         <th>ID</th>
