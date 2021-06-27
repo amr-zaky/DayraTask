@@ -12,6 +12,7 @@ use App\Http\Requests\CreateInvoiceAndClient;
 use App\Mail\SendInvoiceMail;
 use App\Service\Client\CLinetServiceImp;
 use App\Service\Client\InvoiceServiceImp;
+use http\Exception\RuntimeException;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -35,19 +36,29 @@ class ClientInvoiceController extends Controller
 
     public function createInvoiceAndCLinet(CreateInvoiceAndClient  $invoiceAndClientRequest)
     {
-        $client=$this->clientService->store($invoiceAndClientRequest->getClientData());
-        $invoice=array_merge($invoiceAndClientRequest->getInvoiceData(),['client_id'=>$client->id]);
-        $invoice=$this->invoiceService->store($invoice);
-        $this->sendInvoiceMail($client,$invoice);
-        return ApiResponse::success('Invoice And Client Create Successfully');
+        try {
+            $client=$this->clientService->store($invoiceAndClientRequest->getClientData());
+            $invoice=array_merge($invoiceAndClientRequest->getInvoiceData(),['client_id'=>$client->id]);
+            $invoice=$this->invoiceService->store($invoice);
+            $this->sendInvoiceMail($client,$invoice);
+            return ApiResponse::success('Invoice And Client Create Successfully');
+        }
+        catch(\Exception $e){
+            return  ApiResponse::errors(['sendEmail'=>'Client and Invoice Created But Error in sending email ... Check Config ']);
+        }
     }
 
     public function CreateInvoice(CreateInvoice  $createInvoiceRequest)
     {
-       $invoice=$this->invoiceService->store($createInvoiceRequest->getInvoiceData());
-       $client=$this->invoiceService->getInvoiceCLient($invoice->client_id);
-        $this->sendInvoiceMail($client,$invoice);
-        return ApiResponse::success('Invoice Created Successfully');
+        try {
+            $invoice=$this->invoiceService->store($createInvoiceRequest->getInvoiceData());
+            $client=$this->invoiceService->getInvoiceCLient($invoice->client_id);
+            $this->sendInvoiceMail($client,$invoice);
+            return ApiResponse::success('Invoice Created Successfully And Email was  Send .');
+        }
+        catch(\Exception $e){
+            return  ApiResponse::errors(['sendEmail'=>'Invoice Created But Error in sending email ... Check Config ']);
+        }
     }
 
     private function sendInvoiceMail($client,$invoice)

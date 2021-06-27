@@ -83,6 +83,12 @@
                             appendError('amount',errors['amount']);
                         if (errors['invoice_due_date'])
                             appendError('date',errors['invoice_due_date']);
+                        if (errors['sendEmail'])
+                        {
+                            appendError('sendEmail',errors['sendEmail']);
+                            $('#amount').val('');
+                            $('#date').val('');
+                        }
                     }
                 });
 
