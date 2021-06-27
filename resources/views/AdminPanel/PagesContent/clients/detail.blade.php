@@ -33,8 +33,6 @@
                         localStorage.removeItem('token');
                         window.location="{{route("loginPage")}}"
                     }
-
-                    alert('error');
                 }
             });
 
