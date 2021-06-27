@@ -44,6 +44,7 @@ class ClientInvoiceController extends Controller
             return ApiResponse::success('Invoice And Client Create Successfully');
         }
         catch(\Exception $e){
+            //   DB::rollback(); if requirement restrict to send and create or not create
             return  ApiResponse::errors(['sendEmail'=>'Client and Invoice Created But Error in sending email ... Check Config ']);
         }
     }
@@ -57,6 +58,7 @@ class ClientInvoiceController extends Controller
             return ApiResponse::success('Invoice Created Successfully And Email was  Send .');
         }
         catch(\Exception $e){
+            //   DB::rollback(); if requirement restrict to send and create or not create
             return  ApiResponse::errors(['sendEmail'=>'Invoice Created But Error in sending email ... Check Config ']);
         }
     }
